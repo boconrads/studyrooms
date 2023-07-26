@@ -22,8 +22,9 @@ def home(request):
     
     #rooms = Room.objects.all # this gives you all the rooms that are in the db
     
-    topics = Topic.objects.all 
-    context =  {'rooms': rooms, 'topics': topics}
+    topics = Topic.objects.all
+    room_count = rooms.count()
+    context =  {'rooms': rooms, 'topics': topics, 'room_count': room_count}
     return render(request, 'base/home.html', context)
 
 def room(request, pk):
