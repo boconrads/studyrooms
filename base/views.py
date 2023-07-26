@@ -1,14 +1,37 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Room, Topic
+from django.contrib.auth.models import User
 from .forms import RoomForm
 from django.db.models import Q #we can wrap search parameters and add & or 'OR' = |
-
+from django.contrib.auth import authenticate, login, logout
 #
 # rooms = [
 #     {'id': 1, 'name': 'lets learn python'},
 #     {'id': 2, 'name': 'design with me'},
 #     {'id': 3, 'name': 'frontend developers'},
 # ]
+
+def loginPage(request): # dont call it login on its own because of built-in function login 
+    if request.method == "POST": #checks if the user filled in their info
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(username=username) #checking if the user exists
+        except:
+            messages.error(request, 'User does not exist')
+        
+        user = authenticate(request, username=username, password=password) #need to authenticate if credentials are correct
+        if user is not None:
+            login(request, user)
+            return redirect('home')   
+        else:
+             messages.error(request, 'Username or password does not exist')
+
+
+    context = {}
+    return render(request, 'base/login_register.html', context)
+
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
