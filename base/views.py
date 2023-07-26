@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Room, Topic
 from .forms import RoomForm
+from django.db.models import Q #we can wrap search parameters and add & or 'OR' = |
 
 #
 # rooms = [
@@ -12,7 +13,13 @@ from .forms import RoomForm
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     
-    rooms = Room.objects.filter(topic__name__icontains=q) #if it contains anything from q (like pyt (fully python)) it will run filter 
+    rooms = Room.objects.filter(
+        Q(topic__name__icontains=q) |
+        Q(name__icontains=q) |
+        Q(description__icontains=q)
+        ) #if it contains anything from q (like pyt (fully python)) it will run filter 
+    
+    
     #rooms = Room.objects.all # this gives you all the rooms that are in the db
     
     topics = Topic.objects.all 
