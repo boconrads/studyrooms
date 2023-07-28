@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Room, Topic
@@ -83,6 +84,9 @@ def updateRoom(request, pk): #add primary key so we know what we are updating
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room) #passing instance and prefill with room data
 
+    if request.user != room.host:
+        return HttpResponse('You are not allowed here!')
+
     if request.method == 'POST':
         form= RoomForm(request.POST, instance=room) #tells wich room to update
         if form.is_valid():
@@ -95,6 +99,10 @@ def updateRoom(request, pk): #add primary key so we know what we are updating
 @login_required(login_url='login')
 def deleteRoom(request, pk):
     room = Room.objects.get(id=pk) #we need to know which room we are deleting
+    
+    if request.user != room.host:
+        return HttpResponse('You are not allowed here!')
+
     if request.method == 'POST': #when click delete, delete room
         room.delete()
         return redirect('home') #send user back to home after deleting

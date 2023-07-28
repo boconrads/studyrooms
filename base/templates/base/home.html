@@ -34,8 +34,10 @@
 
         {% for room in rooms %}
             <div>
+                {% if request.user == room.host %}
                 <a href="{% url 'update-room' room.id %}">Edit</a>
                 <a href="{% url 'delete-room' room.id %}">Delete</a>
+                {% endif %}
                 <span>@{{ room.host.username }}</span>
                 
                 {% comment %} Passing the name 'room' from urls.py, quicker to edit when needs to change {% endcomment %}
