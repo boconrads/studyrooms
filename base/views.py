@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Room, Topic
+from .models import Room, Topic, Message
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RoomForm
@@ -83,7 +83,17 @@ def room(request, pk):
     #     if i['id'] == int(pk):
     #         room = i
     room = Room.objects.get(id=pk) #returns 1 value, can't be double
-    context =  {'room': room}
+    room_messages = room.message_set.all().order_by('-created') #get class message and get all children
+
+    if request.method == 'POST':
+        message = Message.objects.create(
+            user=request.user,
+            room=room,
+            body=request.POST.get('body')
+        )
+        return redirect('room', pk=room.id) #needs to know in which room you were. You need to fully reload page
+
+    context =  {'room': room, 'room_messages': room_messages}
     return render(request, 'base/room.html', context)
 
 @login_required(login_url='login')
