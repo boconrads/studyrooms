@@ -5,5 +5,11 @@
     <input type="text" name="q" placeholder="Search rooms..." /> 
     {% comment %} user needs to hit enter (type text) and name q is to add q (query search)  {% endcomment %}
 </form>
+{% if request.user.is_authenticated %}
+<a href="{% url 'logout' %}">Log out</a>
+{% else %}
 <a href="{% url 'login' %}">Log in</a>
+{% endif %}
+
+
 <hr />

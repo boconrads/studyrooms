@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Room, Topic
 from django.contrib.auth.models import User
 from .forms import RoomForm
@@ -32,6 +33,11 @@ def loginPage(request): # dont call it login on its own because of built-in func
     context = {}
     return render(request, 'base/login_register.html', context)
 
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
+
+
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -59,6 +65,7 @@ def room(request, pk):
     context =  {'room': room}
     return render(request, 'base/room.html', context)
 
+@login_required(login_url='login')
 def createRoom(request):
     form = RoomForm()
     if request.method == 'POST':
@@ -71,7 +78,7 @@ def createRoom(request):
     context = {'form': form}
     return render(request, 'base/room_form.html', context)
 
-
+@login_required(login_url='login')
 def updateRoom(request, pk): #add primary key so we know what we are updating
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room) #passing instance and prefill with room data
@@ -85,6 +92,7 @@ def updateRoom(request, pk): #add primary key so we know what we are updating
     context = {'form': form} #dictionary
     return render(request, 'base/room_form.html', context)
 
+@login_required(login_url='login')
 def deleteRoom(request, pk):
     room = Room.objects.get(id=pk) #we need to know which room we are deleting
     if request.method == 'POST': #when click delete, delete room
