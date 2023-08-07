@@ -84,6 +84,7 @@ def room(request, pk):
     #         room = i
     room = Room.objects.get(id=pk) #returns 1 value, can't be double
     room_messages = room.message_set.all().order_by('-created') #get class message and get all children
+    participants = room.participants.all()
 
     if request.method == 'POST':
         message = Message.objects.create(
@@ -91,9 +92,10 @@ def room(request, pk):
             room=room,
             body=request.POST.get('body')
         )
+        room.participants.add(request.user) #add a user
         return redirect('room', pk=room.id) #needs to know in which room you were. You need to fully reload page
 
-    context =  {'room': room, 'room_messages': room_messages}
+    context =  {'room': room, 'room_messages': room_messages, 'participants': participants}
     return render(request, 'base/room.html', context)
 
 @login_required(login_url='login')

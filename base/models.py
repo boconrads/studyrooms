@@ -15,7 +15,7 @@ class Room(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True) # Access topic defined in class above
     name = models.CharField(max_length=200) #name of room
     description = models.TextField(null=True, blank=True) #room description, is optional
-    #participants =
+    participants = models.ManyToManyField(User, related_name='participants', blank=True)
     updated = models.DateTimeField(auto_now=True) #takes timestamp everytime you save it
     created = models.DateTimeField(auto_now_add=True) #takes timestamp when created
 

@@ -1,29 +1,53 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>{{ room.name }}</h1>
 
-<p>{{ room.description }}</p>
+<style>
+.room-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+</style>
 
-<div class="comment-wrapper">
-    <h3>Conversation</h3>
-    <hr />
+<div class="room-container">
+    <div>
 
-    {% for message in room_messages %}
-        <div>
-            <small>@{{ message.user }} {{ message.created|timesince }} ago</small>
+        <h1>{{ room.name }}</h1>
+
+        <p>{{ room.description }}</p>
+
+        <div class="comment-wrapper">
+            <h3>Conversation</h3>
             <hr />
-            <p>{{ message.body }}</p>
+
+            {% for message in room_messages %}
+                <div>
+                    <small>@{{ message.user }} {{ message.created|timesince }} ago</small>
+                    <hr />
+                    <p>{{ message.body }}</p>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-</div>
 
-{% if request.user.is_authenticated %}
-<div class="comment-form">
-<form method="POST" action="">
-    {% csrf_token %}
-    <input type="text" name="body" placeholder="Start typing here..."/>
-</div>
+        {% if request.user.is_authenticated %}
+        <div class="comment-form">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="text" name="body" placeholder="Start typing here..."/>
+            </form>
+        </div>
 
-{% endif %}
+        {% endif %}
+        
+    </div>
+    <div>
+        <h3>Participants</h3>
+        <hr />
+        {% for user in participants %}
+            <div>
+                <p>@{{ user.username }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock content %}
