@@ -74,7 +74,8 @@ def home(request):
     
     topics = Topic.objects.all
     room_count = rooms.count()
-    context =  {'rooms': rooms, 'topics': topics, 'room_count': room_count}
+    room_messages = Message.objects.filter(Q(room__name__icontains=q)) #this is filtering messages that contains the room name. so only messages sent in room will be visible in activity feed
+    context =  {'rooms': rooms, 'topics': topics, 'room_count': room_count, 'room_messages': room_messages}
     return render(request, 'base/home.html', context)
 
 def room(request, pk):
