@@ -1,5 +1,6 @@
+{% load static %}
 <a href="/">
-    <h1> Logo </h1>
+    <img src={% static 'images/studyrooms-logo.png' %} />
 </a>
 <form method="GET" action="{% url 'home' %}">
     <input type="text" name="q" placeholder="Search rooms..." /> 

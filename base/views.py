@@ -114,7 +114,9 @@ def createRoom(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
+            room = form.save(commit=False) #get instance of room
+            room.host = request.user #host decided based on who is logged in
+            room.save()
             return redirect('home') #redirect to home, home is given name
         #print(request.POST) #this and above code is also in django documentation 
 
