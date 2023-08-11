@@ -1,12 +1,11 @@
 body {
-  background-color: #504d4d;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 body h1 {
-  color: bisque;
+  color: rgb(236, 236, 236);
 }
 body a {
-  color: aquamarine;
+  color: rgb(159, 118, 255);
 }
 body p, body span, body small {
   color: rgb(233, 233, 233);

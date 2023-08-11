@@ -1,17 +1,23 @@
 {% load static %}
-<a href="/">
-    <img src={% static 'images/studyrooms-logo.png' %} />
-</a>
-<form method="GET" action="{% url 'home' %}">
-    <input type="text" name="q" placeholder="Search rooms..." /> 
-    {% comment %} user needs to hit enter (type text) and name q is to add q (query search)  {% endcomment %}
-</form>
-{% if request.user.is_authenticated %}
-<p>Hello {{ request.user }}
-<a href="{% url 'logout' %}">Log out</a>
-{% else %}
-<a href="{% url 'login' %}">Log in</a>
-{% endif %}
+
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src={% static 'images/studyrooms-logo.png' %} alt="Logo" width="100" height="100" class="d-inline-block align-text-center">
+      </a>
+
+      <form method="GET" action="{% url 'home' %}">
+        <input type="text" name="q" placeholder="Search rooms..." /> 
+        {% comment %} user needs to hit enter (type text) and name q is to add q (query search)  {% endcomment %}
+    </form>
+
+    {% if request.user.is_authenticated %}
+    <p>Hello {{ request.user }}</p>
+    <a href="{% url 'logout' %}">Log out</a>
+    {% else %}
+    <a href="{% url 'login' %}">Log in</a>
+    {% endif %}
 
 
-<hr />
+    </div>
+</nav>
