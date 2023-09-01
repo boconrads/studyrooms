@@ -2,24 +2,28 @@
 
 {% block content %}
 
-<h1>Home</h1>
 
-<div class="main-container">
+<div class="container">
 
-    <div>
-      {% include 'base/topics_component.html' %}
-    </div>
+    <div class="row">
 
-    <div>
-        <h5>{{ room_count }} rooms available</h5>
-        <a href="{% url 'create-room' %}">Create Room</a>
-        <div>
-            {% include 'base/feed_component.html' %}
+        <div class="col-6 col-sm-3 ">
+        <p class="subtitle pt-5">Browse topics</p>
+        {% include 'base/topics_component.html' %}
         </div>
-    </div>
 
-    <div>
-        {% include 'base/activity_component.html' %}
+        <div class="col-6 col-sm-6">
+            <p class="subtitle pt-5">{{ room_count }} rooms available</p>
+            <a href="{% url 'create-room' %}">Create Room</a>
+            <div>
+                {% include 'base/feed_component.html' %}
+            </div>
+        </div>
+
+        <div class="col-6 col-sm-3">
+            <p class="subtitle pt-5">Recent activity</p>
+            {% include 'base/activity_component.html' %}
+        </div>
     </div>
 </div>
 

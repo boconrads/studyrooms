@@ -20,7 +20,8 @@ body p, body span, body small {
 
 .subtitle {
   color: white;
-  font-size: 22px;
+  font-size: 28px;
+  font-weight: 600;
 }
 
 .navbar {
@@ -28,6 +29,18 @@ body p, body span, body small {
   -webkit-box-shadow: 2px 7px 31px -3px rgba(65, 2, 159, 0.2);
   -moz-box-shadow: 2px 7px 31px -3px rgba(65, 2, 159, 0.2);
   box-shadow: 2px 7px 31px -3px rgba(65, 2, 159, 0.2);
+}
+
+form input {
+  border-radius: 50px;
+  border-color: #aaaaaa;
+  padding: 15px;
+  height: 40px;
+  width: 300px;
+}
+form input:active {
+  color: #5200FF;
+  border-color: #5200FF;
 }
 
 /*# sourceMappingURL=main.css.map */

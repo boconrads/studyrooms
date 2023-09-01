@@ -5,6 +5,7 @@ $main-color: #74EBD5;
 $secondary-color: #ACB6E5;
 $link-color: #5200FF;
 $text-color: #252525;
+$gray-light: #aaaaaa;
 
 // Main styles
 body {
@@ -29,7 +30,8 @@ body {
 
 .subtitle {
     color: white;
-    font-size: 22px;
+    font-size: 28px;
+    font-weight:600;
 }
 
 // .main-container {
@@ -42,4 +44,23 @@ body {
     -webkit-box-shadow: 2px 7px 31px -3px rgb(65, 2, 159, 0.2);
     -moz-box-shadow: 2px 7px 31px -3px rgba(65, 2, 159,0.2);
     box-shadow: 2px 7px 31px -3px rgba(65, 2, 159,0.2);
+}
+
+
+
+// specific elements
+
+form {
+    input {
+        border-radius: 50px;
+        border-color: $gray-light;
+        padding: 15px;
+        height: 40px;
+        width: 300px;
+
+        &:active {
+            color: $link-color;
+            border-color: $link-color;
+        }
+    }
 }
