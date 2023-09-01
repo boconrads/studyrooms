@@ -1,23 +1,29 @@
 {% load static %}
-
-<nav class="navbar bg-body-tertiary">
+<div class="row">
+  <nav class="navbar">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-        <img src={% static 'images/studyrooms-logo.png' %} alt="Logo" width="100" height="100" class="d-inline-block align-text-center">
-      </a>
+      <div class="col-5">
+        <a class="navbar-brand" href="/">
+          <img src={% static 'images/tree-icon.png' %} alt="Logo" width="100" height="100" class="d-inline-block align-text-center">
+        </a>
+        <h1 class="d-inline">Hobby Tree</h1>
+        </div>
+        <div class="col-3">
+          <form method="GET" action="{% url 'home' %}">
+            <input type="text" name="q" placeholder="Search rooms..." /> 
+            {% comment %} user needs to hit enter (type text) and name q is to add q (query search)  {% endcomment %}
+        </form>
+      </div>
+      
+      <div class="col-4">
+        {% if request.user.is_authenticated %}
+        <p>Welcome back, {{ request.user }}</p>
+        <a href="{% url 'logout' %}">Log out</a>
+        {% else %}
+        <a href="{% url 'login' %}">Log in</a>
+        {% endif %}
 
-      <form method="GET" action="{% url 'home' %}">
-        <input type="text" name="q" placeholder="Search rooms..." /> 
-        {% comment %} user needs to hit enter (type text) and name q is to add q (query search)  {% endcomment %}
-    </form>
-
-    {% if request.user.is_authenticated %}
-    <p>Hello {{ request.user }}</p>
-    <a href="{% url 'logout' %}">Log out</a>
-    {% else %}
-    <a href="{% url 'login' %}">Log in</a>
-    {% endif %}
-
-
+      </div>
     </div>
-</nav>
+  </nav>
+</div>

@@ -1,19 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
 body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: linear-gradient(142deg, rgb(116, 235, 213) 0%, rgb(172, 182, 229) 100%);
+  min-height: 100vh;
 }
 body h1 {
-  color: rgb(236, 236, 236);
+  font-family: "Quicksand", sans-serif;
+  color: #74EBD5;
+  font-size: 28px;
 }
 body a {
-  color: rgb(159, 118, 255);
+  color: #5200FF;
+  font-size: 16px;
 }
 body p, body span, body small {
-  color: rgb(233, 233, 233);
+  font-family: "Quicksand", sans-serif;
+  color: #252525;
+  font-size: 16px;
 }
 
-.main-container {
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+.subtitle {
+  color: white;
+  font-size: 22px;
+}
+
+.navbar {
+  background-color: white;
+  -webkit-box-shadow: 2px 7px 31px -3px rgba(65, 2, 159, 0.2);
+  -moz-box-shadow: 2px 7px 31px -3px rgba(65, 2, 159, 0.2);
+  box-shadow: 2px 7px 31px -3px rgba(65, 2, 159, 0.2);
 }
 
 /*# sourceMappingURL=main.css.map */
