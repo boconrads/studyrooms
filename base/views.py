@@ -84,7 +84,7 @@ def room(request, pk):
     #     if i['id'] == int(pk):
     #         room = i
     room = Room.objects.get(id=pk) #returns 1 value, can't be double
-    room_messages = room.message_set.all().order_by('-created') #get class message and get all children
+    room_messages = room.message_set.all().order_by('created') #get class message and get all children
     participants = room.participants.all()
 
     if request.method == 'POST':

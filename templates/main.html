@@ -8,8 +8,11 @@
     {% comment %}<script src="main.js"></script> {% endcomment %}
     <title>Study Room</title>
 </head>
-<body>
+<nav>
     {% include 'navbar.html' %}
+    <hr />
+</nav>
+<body>
 
     {% if messages %}
         <ul class="messages">
@@ -21,4 +24,7 @@
 
     {% block content %}{% endblock %}
 </body>
+<footer>
+    {% include 'footer.html' %}
+</footer>
 </html>
